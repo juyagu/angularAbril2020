@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'clase1app';
+  titulo = 'Listado de alumnos';
+  subtitulo = 'Soy un subtitulo';
 }
+
+
+/*
+VISTA => HTML -> CLASE TS QUE IMPLEMENTAR LOGICA
+
+*/
