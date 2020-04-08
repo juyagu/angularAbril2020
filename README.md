@@ -1,6 +1,19 @@
-# Clase1app
+# Case 1 - Curso Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+
+## NPM INSTALL
+No se olviden de que, una vez clonado o descargado el proyecto, hay que hacer un npm install en la raiz del mismo para descargar las
+dependencias
+
+## Temas vistos
+Vimos como generar componentes Angular, tanto a mano como a través del CLI. Ademas vimos como trabajar con clases entidades y mostrar
+los datos utilizando la directiva *ngFor
+
+## Comandos útiles
+Crear nuevo proyecto: ng new nombreApp
+Crear nuevo componente: ng g component nombreComponente
+Crear una clase: ng g class nombreClase
 
 ## Development server
 
