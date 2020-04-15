@@ -1,0 +1,21 @@
+
+<h3>{{titulo}}</h3>
+<div class="row">
+    <div class="form-group col-3">
+        <label for="">Nombre</label>
+        <input type="text" class="form-control" name="nombre" [(ngModel)]="alumno.nombre" (keyup)="mostrarAlumno()">
+    </div>
+    <div class="form-group col-3">
+        <label for="">Apellido</label>
+        <input type="text" class="form-control" name="apellido" [(ngModel)]="alumno.apellido">
+    </div>
+    <div class="form-group col-3">
+        <label for="">Curso</label>
+        <input type="text" class="form-control" name="curso" [(ngModel)]="alumno.curso">
+    </div>
+    <div class="form-group col-3">
+        <label for="">Edad</label>
+        <input type="text" class="form-control" name="edad" [(ngModel)]="alumno.edad">
+    </div>
+</div>
+<button class="btn btn-primary" type="button">Modificar</button>

@@ -1,0 +1,25 @@
+<h1>Driven Validado</h1>
+<form  #peliForm="ngForm" (ngSubmit)="formEnviado()">
+    <div class="row">
+        <div class="form-group col-4">
+            <label for="">Titulo</label>
+            <input type="text" class="form-control" name="titulo" [(ngModel)]="pelicula.titulo" required #espia #nombre="ngModel">
+            <div [hidden]="nombre.valid || nombre.pristine" class="alert alert-danger">
+                El campo nombre es requerido
+            </div>
+        </div>
+        <div class="form-group col-4">
+            <label for="">Director</label>
+            <input type="text" class="form-control" name="director" [(ngModel)]="pelicula.director">
+        </div>
+        <div class="form-group col-4">
+            <label for="">Género</label>
+            <select name="genero" id="genero" class="form-control" [(ngModel)]="pelicula.genero">
+                <option value="0">Seleccione...</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary" type="submit" [disabled]="!peliForm.form.valid">Guardar</button>
+    </div>
+</form>
