@@ -1,0 +1,21 @@
+<h1>Listado de Películas</h1>
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Título</th>
+            <th>Género</th>
+            <th>Director</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pelicula of peliculas">
+            <td>{{pelicula.id_pelicula}}</td>
+            <td>{{pelicula.titulo}}</td>
+            <td>{{pelicula.director}}</td>
+            <td>{{pelicula.genero}}</td>
+            <td><img [src]="pelicula.foto" style="height: 80px;"></td>
+        </tr>
+    </tbody>
+</table>
