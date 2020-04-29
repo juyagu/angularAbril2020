@@ -1,22 +1,55 @@
 import { Injectable } from '@angular/core';
 import { Pelicula } from './../entities/pelicula';
-import { PELICULAS } from './../mock-peliculas';
-import { Observable, Observer } from 'rxjs';
+import { Genero } from './../entities/genero';
+import { Observable, Observer, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json'
+  })
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PeliculaService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   getPeliculas() : Observable<Pelicula[]>{
-    return new Observable((observer: Observer<Pelicula[]>) => {
+    /*return new Observable((observer: Observer<Pelicula[]>) => {
       observer.next(PELICULAS);
-      observer.complete();
-    })
+      observer.complete();*/
+      const respuesta = this.http.get<Pelicula[]>("http://localhost:3001/angular5/peliculas/");
+      return respuesta;
   }
 
+  getPeliculaxId(id:number):Observable<Pelicula>{
+    return this.http.get<Pelicula>(`http://localhost:3001/angular5/peliculas/${id}`)
+  }
+
+  getGeneros():Observable<Genero[]>{
+    return this.http.get<Genero[]>("http://localhost:3001/angular5/generos");
+  }
+
+  updatePelicula(pelicula:Pelicula):Observable<any>{
+    return this.http.put<any>(`http://localhost:3001/angular5/peliculas/${pelicula.id}`
+    ,pelicula,httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      )
+  }
+
+  private handleError(error: HttpErrorResponse){
+    console.log(`El backend retornó el codigo ${error.status}, el cuerpo del mensaje
+    es ${error.message}`);
+    
+    return throwError("Algo salió mal, intentá mas tarde");
+  }
 }
 
 
@@ -36,5 +69,11 @@ Asincronía
 // axios
 // rxjs => Observables
 
+
+try{
+  intenta esto
+}cath(Exception e){
+  y si rompe entra aca
+}
 
 */

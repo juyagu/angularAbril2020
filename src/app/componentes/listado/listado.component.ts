@@ -11,7 +11,7 @@ export class ListadoComponent implements OnInit {
   //servicioLoco = new PeliculaService();
   constructor(private svcPelicula : PeliculaService) { }
   peliculas:Pelicula[];
-
+  peliculaSeleccionada:number;
 
   ngOnInit() {
     this.getListadoPeliculas();  
@@ -24,7 +24,32 @@ export class ListadoComponent implements OnInit {
       })
   }
 
+  editarPelicula(id:number){
+    this.peliculaSeleccionada = id;
+  }
+
+  cancelacionEdicion(estado){
+    this.getListadoPeliculas();
+    this.peliculaSeleccionada = estado;
+  }
+
+  modificacionOK(guardado){
+    if(guardado){
+      this.getListadoPeliculas();
+      this.peliculaSeleccionada = 0;
+    }
+  }
+
 }
 
 // ng g service nombredelservicio
 // $(document).ready()
+
+/*
+numero:number;
+if(numero){
+  ...
+}else{
+  ...
+}
+*/
