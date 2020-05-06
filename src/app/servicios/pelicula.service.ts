@@ -5,6 +5,8 @@ import { Observable, Observer, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
+import { environment } from './../../environments/environment';
+
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -13,23 +15,21 @@ const httpOptions = {
 }
 
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class PeliculaService {
-
+  url:string = environment.url;
   constructor(private http: HttpClient) { }
 
   getPeliculas() : Observable<Pelicula[]>{
     /*return new Observable((observer: Observer<Pelicula[]>) => {
       observer.next(PELICULAS);
       observer.complete();*/
-      const respuesta = this.http.get<Pelicula[]>("http://localhost:3001/angular5/peliculas/");
+      const respuesta = this.http.get<Pelicula[]>(this.url);
       return respuesta;
   }
 
   getPeliculaxId(id:number):Observable<Pelicula>{
-    return this.http.get<Pelicula>(`http://localhost:3001/angular5/peliculas/${id}`)
+    return this.http.get<Pelicula>(`${this.url}/${id}`)
   }
 
   getGeneros():Observable<Genero[]>{

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PeliculaService } from './../../servicios/pelicula.service';
 import { Pelicula } from './../../entities/pelicula';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listado',
@@ -9,7 +10,7 @@ import { Pelicula } from './../../entities/pelicula';
 })
 export class ListadoComponent implements OnInit {
   //servicioLoco = new PeliculaService();
-  constructor(private svcPelicula : PeliculaService) { }
+  constructor(private svcPelicula : PeliculaService, private router:Router) { }
   peliculas:Pelicula[];
   peliculaSeleccionada:number;
 
@@ -25,7 +26,8 @@ export class ListadoComponent implements OnInit {
   }
 
   editarPelicula(id:number){
-    this.peliculaSeleccionada = id;
+    //this.peliculaSeleccionada = id;
+    this.router.navigate(['/detalle/' + id]);
   }
 
   cancelacionEdicion(estado){

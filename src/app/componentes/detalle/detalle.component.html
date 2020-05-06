@@ -1,4 +1,4 @@
-<h2>Modificar Pelicula</h2>
+<h2>{{titulo}}</h2>
 <div *ngIf="pelicula">
     <form #peliculaForm="ngForm" (ngSubmit)="guardarCambios()">
         <div class="row">
@@ -14,7 +14,8 @@
         <div class="row">
             <div class="form-group col-4">
                 <label for="">Género</label>
-                <select name="genero" id="" class="form-control" [(ngModel)]="pelicula.id_genero" (change)="seleccionGenero()">
+                <select name="genero" id="" class="form-control" [(ngModel)]="pelicula.genero"
+                    (change)="seleccionGenero()">
                     <option *ngFor="let genero of generos" [value]="genero.id_genero">
                         {{genero.descripcion}}
                     </option>
@@ -24,7 +25,9 @@
         <div class="row buttons">
             <button type="submit" class="btn btn-primary mr-20">Aceptar</button>
             <button type="button" class="btn btn-info mr-20" (click)="cancelarEdicion()">Cancelar</button>
-            <button type="button" class="btn btn-danger">Eliminar</button>
+            <div *ngIf="!peliculaNueva">
+                <button type="button" class="btn btn-danger">Eliminar</button>
+            </div>
         </div>
     </form>
 </div>

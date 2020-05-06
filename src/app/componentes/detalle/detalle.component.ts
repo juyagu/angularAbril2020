@@ -2,6 +2,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PeliculaService } from './../../servicios/pelicula.service';
 import { Pelicula } from './../../entities/pelicula';
 import { Genero } from './../../entities/genero';
+import { PeliculaClase } from './../../entities/peliculaClase';
+
+
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-detalle',
@@ -9,9 +13,11 @@ import { Genero } from './../../entities/genero';
   styleUrls: ['./detalle.component.css']
 })
 export class DetalleComponent implements OnInit {
-  @Input()
+  
   id:number;
-
+  nombre:string;
+  titulo:string;
+  peliculaNueva:boolean;
   @Output()
   cancelar = new EventEmitter();
 
@@ -19,18 +25,32 @@ export class DetalleComponent implements OnInit {
   guardar = new EventEmitter();
 
   pelicula: Pelicula;
+  peliculaClase:PeliculaClase;
   generos : Genero[];
 
 
-  constructor(private svcPelicula : PeliculaService) { }
+  constructor(private svcPelicula : PeliculaService, private route: ActivatedRoute, private router: Router) { 
+    this.route.params.subscribe(params => {this.id = params['id']})
+  }
 
   ngOnInit() {
-    this.getPelicula();
+    if(typeof this.id !== 'undefined'){
+      this.peliculaNueva = false;
+      this.titulo = "Modificar película";
+      this.getPelicula();
+    }else{
+      this.peliculaNueva = true;
+      this.titulo = "Alta de película";
+      this.pelicula = {id:0, titulo: "",genero:"",director:"",foto:""}
+      this.peliculaClase = new PeliculaClase(0,"","","","");
+    }
+    
     this.obtenerGeneros();
   }
 
   cancelarEdicion(){
-    this.cancelar.emit(false);
+    //this.cancelar.emit(false);
+    this.router.navigate(['/home']);
   }
 
   getPelicula(){
